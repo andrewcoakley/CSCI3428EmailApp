@@ -1,27 +1,29 @@
 /*
- * Humaid Muhammad Agowun (A00430163) 
- * Mark Trickett (A00416603) 
- * Diego Gardiner (A00423960)
- * 
+ * Andrew Coakley (A00398990)
+ * Kinshuk Chadha (A00431288)
+ * Alexander Lamey (A00410007)
+ * Priya {INSERT LAST NAME HERE}{INSERT A # HERE}
+ *
  * displayEmails.js:
  * js file that is used by the inbox and sent items screens.
- * It is used to fetch emails from the server and 
+ * It is used to fetch emails from the server and
  * display them on the screen.
  */
 
 /*
- * Function that is called from the load..Emails function for the 
- * admin and student inbox. The function fetches the emails from the 
+ * Function that is called from the load..Emails function for the
+ * admin and student inbox. The function fetches the emails from the
  * server and displays them on the screen.
  *
  * collectionName = the name of the collection on the server.
  *
  * returns N/A
- */ 
+ */
 function addInboxEmailsFromCollection(collectionName) {
-    var req = {"collectionName": collectionName};
-    $.post(SERVER_URL + '/displayEmailRows', req,
-        displayInboxEmails).fail(runOnAdditionError);
+  var req = { collectionName: collectionName };
+  $.post(SERVER_URL + "/displayEmailRows", req, displayInboxEmails).fail(
+    runOnAdditionError
+  );
 }
 
 /*
@@ -29,18 +31,18 @@ function addInboxEmailsFromCollection(collectionName) {
  * It adds the email strings to HTML.
  *
  * data = data received from the server
- * 
+ *
  * returns N/A
- */ 
+ */
 function displayInboxEmails(data) {
-    var emails = data.JSONInCollection.emails;
-    var name = data.collectionName;
-    var encoding = getCodeFromName(name);
-    for (var i = 0; i < emails.length && i < MAX_NUM_EMAILS; i++) {
-        $("div.email" + i).html(
-            createNewInboxRow(i, encoding, emails[i]) + "<br><br>"
-        );
-    }
+  var emails = data.JSONInCollection.emails;
+  var name = data.collectionName;
+  var encoding = getCodeFromName(name);
+  for (var i = 0; i < emails.length && i < MAX_NUM_EMAILS; i++) {
+    $("div.email" + i).html(
+      createNewInboxRow(i, encoding, emails[i]) + "<br><br>"
+    );
+  }
 }
 
 /*
@@ -52,13 +54,15 @@ function displayInboxEmails(data) {
  * email = the json containing the email.
  *
  * return a string containing an inbox email row.
- */ 
+ */
 function createNewInboxRow(i, encoding, email) {
-    return '<div data-type="horizontal">'
-            + createEmailTwoButtons(i,encoding, email)
-            + createCheckBox(email.urgency, i, encoding)
-            + createDeleteKey(encoding, i)
-         + '</div>';
+  return (
+    '<div data-type="horizontal">' +
+    createEmailTwoButtons(i, encoding, email) +
+    createCheckBox(email.urgency, i, encoding) +
+    createDeleteKey(encoding, i) +
+    "</div>"
+  );
 }
 
 /*
@@ -67,25 +71,25 @@ function createNewInboxRow(i, encoding, email) {
  * err = the error object.
  *
  * returns N/A
- */ 
+ */
 function runOnAdditionError(err) {
-    alert("There was a server error in adding the emails to this page.");
+  alert("There was a server error in adding the emails to this page.");
 }
 
-
 /*
- * Function that is called from the load..Emails function for the 
- * admin and student sent items. The function fetches the emails from 
+ * Function that is called from the load..Emails function for the
+ * admin and student sent items. The function fetches the emails from
  * the server and display them on the screen.
  *
  * name = the name of the collection on the server.
  *
  * returns N/A
- */ 
+ */
 function addSentEmailsFromCollection(name) {
-    var req = {"collectionName":name};
-    $.post(SERVER_URL + '/displayEmailRows', req,
-        displaySentEmails).fail(runOnAdditionError);
+  var req = { collectionName: name };
+  $.post(SERVER_URL + "/displayEmailRows", req, displaySentEmails).fail(
+    runOnAdditionError
+  );
 }
 
 /*
@@ -95,17 +99,17 @@ function addSentEmailsFromCollection(name) {
  * data = data received from the server
  *
  * returns N/A
- */ 
+ */
 function displaySentEmails(data) {
-    var emails = data.JSONInCollection.emails;
-    var name = data.collectionName;
-    var encoding = getCodeFromName(name);
+  var emails = data.JSONInCollection.emails;
+  var name = data.collectionName;
+  var encoding = getCodeFromName(name);
 
-    for (var i = 0; i < emails.length && i < MAX_NUM_EMAILS; i++) {
-        $("div.email" + i).html(
-            createNewSentRow(i, encoding, emails[i]) + "<br><br>"
-        );
-    }
+  for (var i = 0; i < emails.length && i < MAX_NUM_EMAILS; i++) {
+    $("div.email" + i).html(
+      createNewSentRow(i, encoding, emails[i]) + "<br><br>"
+    );
+  }
 }
 
 /*
@@ -119,8 +123,10 @@ function displaySentEmails(data) {
  * returns the string containing a sent email row.
  */
 function createNewSentRow(i, encoding, email) {
-    return '<div data-type="horizontal">'
-            + createEmailTwoButtons(i, encoding, email)
-            + createDeleteKey(encoding, i)
-        + '</div>';
+  return (
+    '<div data-type="horizontal">' +
+    createEmailTwoButtons(i, encoding, email) +
+    createDeleteKey(encoding, i) +
+    "</div>"
+  );
 }

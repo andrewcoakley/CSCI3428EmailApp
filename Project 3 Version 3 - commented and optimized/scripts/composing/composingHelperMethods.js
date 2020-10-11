@@ -1,7 +1,8 @@
 /*
- * Humaid Muhammad Agowun (A00430163)
- * Mark Trickett (A00416603)
- * Diego Gardiner (A00423960)
+ * Andrew Coakley (A00398990)
+ * Kinshuk Chadha (A00431288)
+ * Alexander Lamey (A00410007)
+ * Priya {INSERT LAST NAME HERE}{INSERT A # HERE}
  *
  * composingHelperMethods.js:
  * js file that is used by both composing screen that contains the
